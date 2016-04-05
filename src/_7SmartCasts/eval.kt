@@ -16,6 +16,16 @@ fun eval(e : Expr) : Int {
     throw IllegalArgumentException("Unknown expression")
 }
 
+// can be simplified to
+
+fun evalWhen(e : Expr) : Int {
+    return when (e) {
+        is Num -> e.value
+        is Sum -> eval(e.left) + eval(e.right)
+        else -> throw IllegalArgumentException("Unknown expression")
+    }
+}
+
 fun main(args : Array<String>) {
 
     println(eval(Sum(Num(1), Num(2))))
